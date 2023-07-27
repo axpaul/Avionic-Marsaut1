@@ -4,6 +4,8 @@
 
 *Open hardware license project*
 
+![alt tag](https://github.com/axpaul/Avionic-Marsaut1/blob/main/Image/MS1-3D%20n%C2%B02%20V2.png)
+
 La première itération du séquenceur, conçue par Arthur Chassande (plus tard abandonnée), était équipée d'un microcontrôleur Stm32H7. La deuxième version, par Paul Miailhe, utilise directement un Nucléo STM32F411. Ce séquenceur comprenait deux cartes électroniques supplémentaires, une carte d'interface intégrée dans le lanceur, qui abritait l'ensemble des connecteurs, et une carte IHM indépendante, qui pouvait afficher à l'utilisateur l'état actuel de la fusée. Sur la carte mère, on trouve :
 
 ## Capteurs de base
