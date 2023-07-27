@@ -1,6 +1,6 @@
 # Avionic-Marsaut1
        
-##Marsaut_1 est une fusée expérimentale équipée d'une avionique (électronique de bord) créée par Mines Space. La version 2022 a été lancée à C'space.
+##Marsaut_1 est une fusée expérimentale équipée d'une avionique (électronique de bord) créée par Mines Space. La version n°2 a été lancée au C'space 2022.
 
 *Open hardware license project*
 
