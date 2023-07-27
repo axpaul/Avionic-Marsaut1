@@ -10,8 +10,8 @@ The first iteration of the sequencer designed by Arthur Chassande (later abandon
 - A buzzer and an LED for indicating the card status
 - H-bridge drivers to control the various deployment systems (parachute, drone and nose cone)
 
-| Routing | 3D | Description |
+| 3D | Routing  | Description |
 |:---:|:---:|:---:|
 | ![alt text](https://github.com/axpaul/Avionic-Marsaut1/blob/main/Image/MS1-3D%20V1.png) | ![alt text](https://github.com/axpaul/Avionic-Marsaut1/blob/main/Image/MS1-routage%20V1.png) | V°1 of avionics for Marsaut 1 |
-| ![alt text](https://github.com/axpaul/Avionic-Marsaut1/blob/main/Image/MS1-3D%20V2.png) | ![alt text](https://github.com/axpaul/Avionic-Marsaut1/blob/main/Image/MS1-routage%20V2.png) | V°2 of avionics for Marsaut 1 |
+| ![alt text](https://github.com/axpaul/Avionic-Marsaut1/blob/main/Image/MS1-3D%20V2.png) | ![alt text](https://github.com/axpaul/Avionic-Marsaut1/blob/main/Image/MS1-routage%20N%C2%B03%20V2.png) | V°2 of avionics for Marsaut 1 |
 
