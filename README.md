@@ -1,6 +1,8 @@
 # Avionic-Marsaut1
+       
+<h2>Marsaut_1 est une fusée expérimentale équipée d'une avionique (électronique de bord) créée par Mines Space. La version 2022 a été lancée à C'space.</h2>
 
-Marsaut_1 est une fusée expérimentale équipée d'une avionique (électronique de bord) créée par Mines Space. La version 2022 a été lancée à C'space.
+*Open hardware license project*
 
 La première itération du séquenceur, conçue par Arthur Chassande (plus tard abandonnée), était équipée d'un microcontrôleur Stm32H7. La deuxième version, par Paul Miailhe, utilise directement un Nucléo STM32F411. Ce séquenceur comprenait deux cartes électroniques supplémentaires, une carte d'interface intégrée dans le lanceur, qui abritait l'ensemble des connecteurs, et une carte IHM indépendante, qui pouvait afficher à l'utilisateur l'état actuel de la fusée. Sur la carte mère, on trouve :
 
