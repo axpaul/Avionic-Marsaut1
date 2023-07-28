@@ -1,0 +1,778 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD21\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">30/01/2022</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">17:48:51</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:02</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc" class="file"><acronym title="C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc">C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">126</td></tr>
+</table>
+</td>
+</table><a name="ID5ZN31C1QGXX1CA0V54YF0SAANGPRGR2XAOTUPLCFTUBAYNFJ2V2D"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDX0PMNK1INANCBNL5CZ2Y2JG35HFJMOLTY2LMDIH0LA0PG3JQ5MH">Clearance Constraint (Gap=11.811mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDCPJGUYL3AKJQD33J4TROK2XEUIQUVHQYAGCSBLMLHI5L5PX5HTKC">Clearance Constraint (Gap=11.811mil) (InNetClass('HF')),(All)</a></td>
+<td class="column2">6</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDKFBLONZ401DQEKDW4SNYTFS40EH4W2QOQJOLT0FYE4G4KUN1RJVD">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDVEWPPOYAAZBMIKJUNDK0CU3B2FOMLJVFPE5QKMGSHTUKRGBZ2HQP">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAUDQ32PHN13LEI3U032HIECW4LOVS1WOQGA5QZNRBQMTUEN3QGSF">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDNLCDUT4ETIUYGCPHIU2YFFUWSDYT0WR1S2EEPPYXPGP3SQFSD4H">Width Constraint (Min=10mil) (Max=10mil) (Preferred=10mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDQUSNVIP0OCYRID2SXNTBE4U2VHWL43G2U5CWS0EFX4GTDE0VDL3K">Width Constraint (Min=5.928mil) (Max=5.928mil) (Preferred=5.928mil) (InNetClass('HF'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDSDGOHBPE1KDDLI44UNFGSXSXVC4UEITHW1LW4LEQXBRZVHU0FXYD">Width Constraint (Min=10mil) (Max=30mil) (Preferred=30mil) (InNetClass('PWR'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID243GSY411G0VC3AWFEWUS11MXFTRG0IG4HOYXBP5KESDKNLEXRAG">Power Plane Connect Rule(Relief Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDNR1XFC1SF4F2EFU13K3S3G52GP5C1Q3HKBF2KADSLDZPLDGMG10L">Hole Size Constraint (Min=7.874mil) (Max=248.031mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDNFTOPPMAL20FJUOAF4ECN1010BRRAZF24MLZHEKIW11POKDOY2JK">Hole To Hole Clearance (Gap=19.685mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDMMGJZS4DJ4XTM5E2HV5ZUQ0DPTVKBXWGSAUCOMOT20DEGF5MTYF">Minimum Solder Mask Sliver (Gap=10mil) (All),(All)</a></td>
+<td class="column2">96</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDICALQ31OVHAHBGV3QB3LCVITKJJLRCIE25WNXVBFIIH53QAQMHX">Silk To Solder Mask (Clearance=10mil) (IsPad),(All)</a></td>
+<td class="column2">20</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID3KDATASK3VTRI3W05AIPG2HXIJAI14CEIVOQBIKFD14RPPTRC1OL">Silk to Silk (Clearance=10mil) (All),(All)</a></td>
+<td class="column2">4</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDLWB2LPZAZGW3NSOCAVM0MJYR0DBB0XWLKHPWNVGHNBA2FOAJF0YD">Net Antennae (Tolerance=0mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDRZX2U1QEOB1MPDCLFLNN5T54VPJCZWDN4H2L4KHA0CZ51INJPPCP">Board Clearance Constraint (Gap=0mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDTKAIH0G2ZANXNUPKUQNCQPBSEPZUIVGRGBL4UCNKQ2YLZINPS1LD">Matched Lengths(Tolerance=100mil) (InxSignalClass('xSignals_U11_U4_MatchLengthsClass_1'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQLME3AO3Y23PB2JTYRLU0CWK4XRDRUSTXKWG5DRX5OBRAVUPWZC">Matched Lengths(Tolerance=78.74mil) (InxSignalClass('xSignals_U11_U4_MatchLengthsClass'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID5G1PAGJVZN0LIPLX2XSFNTTN1M241YASN2EW2WMYXY2R4T22BLGE">Matched Lengths(Tolerance=100mil) (InxSignalClass('xSignals_U4_U5_MatchLengthsClass'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDPTYTGGSPKOZQK5NLOUWR2PC2QDL3WGN22OVX1CBDRRMXFZD4XFEP">Matched Lengths(Tolerance=100mil) (InxSignalClass('xSignals_U11_U4_MatchLengthsClass_2'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDKAC3U2V3PKXDCQ0KQOO3M44OACMSNMCHW5UYM0JAT5IF0TPBUDPB">Matched Lengths(Tolerance=78.74mil) (InxSignalClass('xSignals_J79_U4_MatchLengthsClass'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDJTMZ22Y4W3C2LDHOYBPUU5ONAIFPSNRLOXM1ZISWSUM2G01SHJO">Matched Lengths(Tolerance=50mil) (InxSignalClass('xSignals_U3_Passives_U4_MatchLengthsClass'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID33EOJE3LNM30NCCV11SNK2DKKLSPCKU5HMHE1YC53SR2MTQHI4YC">Matched Lengths(Tolerance=50mil) (InxSignalClass('xSignals_U3_Passives_MatchLengthsClass'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID55AFNE33OABUJKGEGWCXU2ZMFC2RH4CPNWXQJ5JLLEYFH1IUXNZI">Matched Lengths(Tolerance=100mil) (InxSignalClass('xSignals_SD_MatchLengthsClass'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDC4VRSI14KABZLRAZIUFVLE1ZNLJISWOLAN15E5VYAL3CQ1ELGJL">Matched Lengths(Tolerance=78.74mil) (InxSignalClass('xSignals_U2_U4_MatchLengthsClass'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID5M0X00ILBZ4HGMT4GL2XASF0IKJUIDVTEPT4WYGQHX2VJ0LL4HIC">Matched Lengths(Tolerance=78.74mil) (InxSignalClass('xSignals_SD1_U4_MatchLengthsClass'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJCB0XF5LPD5XNGIH3KFDYTMSQNVPLGOUNJA5BQFN4NTE24UWLWHP">Matched Lengths(Delay Tolerance=50ps) (InxSignalClass('xSignals_U3_U4_MatchLengthsClass'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDOUJ3KEUJM1AEJFOBJMS1H5MP4LJSTCHOB1QE33EQ5MQRF4G0YEYI">Height Constraint (Min=0mil) (Max=1000mil) (Prefered=500mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">126</td>
+</tr>
+</table><br><a name="IDCPJGUYL3AKJQD33J4TROK2XEUIQUVHQYAGCSBLMLHI5L5PX5HTKC"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=11.811mil) (InNetClass('HF')),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3693.869mil|Location2.X=3706.93mil|Location1.Y=2032.21mil|Location2.Y=2045.271mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3693.869mil|Location2.X=3706.93mil|Location1.Y=2032.21mil|Location2.Y=2045.271mil|Absolute=True">Clearance Constraint: (11.721mil &lt; 11.811mil) Between Track (1021.575mil,-1768.425mil)(1021.575mil,-1632.756mil) on Top Layer And Track (1041.26mil,-1761.26mil)(1041.26mil,-1632.756mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3693.869mil|Location2.X=3706.93mil|Location1.Y=2032.21mil|Location2.Y=2045.271mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3693.869mil|Location2.X=3706.93mil|Location1.Y=2032.21mil|Location2.Y=2045.271mil|Absolute=True">Clearance Constraint: (11.721mil &lt; 11.811mil) Between Track (1021.575mil,-1768.425mil)(1021.575mil,-1632.756mil) on Top Layer And Track (1041.26mil,-1761.26mil)(1170mil,-1890mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3368.824mil|Location2.X=3381.885mil|Location1.Y=2287.648mil|Location2.Y=2300.709mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3368.824mil|Location2.X=3381.885mil|Location1.Y=2287.648mil|Location2.Y=2300.709mil|Absolute=True">Clearance Constraint: (11.721mil &lt; 11.811mil) Between Track (390mil,-1830mil)(705.354mil,-1514.646mil) on Top Layer And Track (635.039mil,-1494.961mil)(824.724mil,-1494.961mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3368.824mil|Location2.X=3381.885mil|Location1.Y=2287.648mil|Location2.Y=2300.709mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3368.824mil|Location2.X=3381.885mil|Location1.Y=2287.648mil|Location2.Y=2300.709mil|Absolute=True">Clearance Constraint: (11.721mil &lt; 11.811mil) Between Track (635.039mil,-1494.961mil)(824.724mil,-1494.961mil) on Top Layer And Track (705.354mil,-1514.646mil)(824.724mil,-1514.646mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3454.673mil|Location2.X=3467.734mil|Location1.Y=2269.999mil|Location2.Y=2283.06mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3454.673mil|Location2.X=3467.734mil|Location1.Y=2269.999mil|Location2.Y=2283.06mil|Absolute=True">Clearance Constraint: (11.721mil &lt; 11.811mil) Between Track (705.354mil,-1514.646mil)(824.724mil,-1514.646mil) on Top Layer And Track (788.504mil,-1537.03mil)(791.203mil,-1534.331mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3454.673mil|Location2.X=3467.734mil|Location1.Y=2269.999mil|Location2.Y=2283.06mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3454.673mil|Location2.X=3467.734mil|Location1.Y=2269.999mil|Location2.Y=2283.06mil|Absolute=True">Clearance Constraint: (11.721mil &lt; 11.811mil) Between Track (705.354mil,-1514.646mil)(824.724mil,-1514.646mil) on Top Layer And Track (791.203mil,-1534.331mil)(824.724mil,-1534.331mil) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDMMGJZS4DJ4XTM5E2HV5ZUQ0DPTVKBXWGSAUCOMOT20DEGF5MTYF"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=10mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4532.595mil|Location2.X=4543.845mil|Location1.Y=1894.375mil|Location2.Y=1905.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4532.595mil|Location2.X=4543.845mil|Location1.Y=1894.375mil|Location2.Y=1905.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (4.819mil &lt; 10mil) Between Pad C1-2(1884.409mil,-1887.559mil) on Top Layer And Via (1850mil,-1900mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [4.819mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3575.62mil|Location2.X=3586.87mil|Location1.Y=2735.238mil|Location2.Y=2746.488mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3575.62mil|Location2.X=3586.87mil|Location1.Y=2735.238mil|Location2.Y=2746.488mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.716mil &lt; 10mil) Between Pad C9-1(943.788mil,-1025.672mil) on Top Layer And Pad C9-2(943.788mil,-1092.601mil) on Top Layer [Top Solder] Mask Sliver [9.716mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2269.375mil|Location2.X=2280.625mil|Location1.Y=1774.375mil|Location2.Y=1785.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2269.375mil|Location2.X=2280.625mil|Location1.Y=1774.375mil|Location2.Y=1785.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.268mil &lt; 10mil) Between Pad J1-01(-420mil,-2020mil) on Multi-Layer And Pad J1-02(-370mil,-2020mil) on Multi-Layer [Top Solder] Mask Sliver [0.268mil] / [Bottom Solder] Mask Sliver [0.268mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2244.375mil|Location2.X=2255.625mil|Location1.Y=1749.375mil|Location2.Y=1760.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2244.375mil|Location2.X=2255.625mil|Location1.Y=1749.375mil|Location2.Y=1760.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.268mil &lt; 10mil) Between Pad J1-01(-420mil,-2020mil) on Multi-Layer And Pad J1-03(-420mil,-2070mil) on Multi-Layer [Top Solder] Mask Sliver [0.268mil] / [Bottom Solder] Mask Sliver [0.268mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2294.375mil|Location2.X=2305.625mil|Location1.Y=1749.375mil|Location2.Y=1760.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2294.375mil|Location2.X=2305.625mil|Location1.Y=1749.375mil|Location2.Y=1760.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.268mil &lt; 10mil) Between Pad J1-02(-370mil,-2020mil) on Multi-Layer And Pad J1-04(-370mil,-2070mil) on Multi-Layer [Top Solder] Mask Sliver [0.268mil] / [Bottom Solder] Mask Sliver [0.268mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2269.375mil|Location2.X=2280.625mil|Location1.Y=1724.375mil|Location2.Y=1735.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2269.375mil|Location2.X=2280.625mil|Location1.Y=1724.375mil|Location2.Y=1735.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.268mil &lt; 10mil) Between Pad J1-03(-420mil,-2070mil) on Multi-Layer And Pad J1-04(-370mil,-2070mil) on Multi-Layer [Top Solder] Mask Sliver [0.268mil] / [Bottom Solder] Mask Sliver [0.268mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2244.375mil|Location2.X=2255.625mil|Location1.Y=1699.375mil|Location2.Y=1710.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2244.375mil|Location2.X=2255.625mil|Location1.Y=1699.375mil|Location2.Y=1710.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.268mil &lt; 10mil) Between Pad J1-03(-420mil,-2070mil) on Multi-Layer And Pad J1-05(-420mil,-2120mil) on Multi-Layer [Top Solder] Mask Sliver [0.268mil] / [Bottom Solder] Mask Sliver [0.268mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2294.375mil|Location2.X=2305.625mil|Location1.Y=1699.375mil|Location2.Y=1710.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2294.375mil|Location2.X=2305.625mil|Location1.Y=1699.375mil|Location2.Y=1710.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.268mil &lt; 10mil) Between Pad J1-04(-370mil,-2070mil) on Multi-Layer And Pad J1-06(-370mil,-2120mil) on Multi-Layer [Top Solder] Mask Sliver [0.268mil] / [Bottom Solder] Mask Sliver [0.268mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2269.375mil|Location2.X=2280.625mil|Location1.Y=1674.375mil|Location2.Y=1685.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2269.375mil|Location2.X=2280.625mil|Location1.Y=1674.375mil|Location2.Y=1685.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.268mil &lt; 10mil) Between Pad J1-05(-420mil,-2120mil) on Multi-Layer And Pad J1-06(-370mil,-2120mil) on Multi-Layer [Top Solder] Mask Sliver [0.268mil] / [Bottom Solder] Mask Sliver [0.268mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2244.375mil|Location2.X=2255.625mil|Location1.Y=1649.375mil|Location2.Y=1660.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2244.375mil|Location2.X=2255.625mil|Location1.Y=1649.375mil|Location2.Y=1660.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.268mil &lt; 10mil) Between Pad J1-05(-420mil,-2120mil) on Multi-Layer And Pad J1-07(-420mil,-2170mil) on Multi-Layer [Top Solder] Mask Sliver [0.268mil] / [Bottom Solder] Mask Sliver [0.268mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2294.375mil|Location2.X=2305.625mil|Location1.Y=1649.375mil|Location2.Y=1660.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2294.375mil|Location2.X=2305.625mil|Location1.Y=1649.375mil|Location2.Y=1660.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.268mil &lt; 10mil) Between Pad J1-06(-370mil,-2120mil) on Multi-Layer And Pad J1-08(-370mil,-2170mil) on Multi-Layer [Top Solder] Mask Sliver [0.268mil] / [Bottom Solder] Mask Sliver [0.268mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2269.375mil|Location2.X=2280.625mil|Location1.Y=1624.375mil|Location2.Y=1635.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2269.375mil|Location2.X=2280.625mil|Location1.Y=1624.375mil|Location2.Y=1635.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.268mil &lt; 10mil) Between Pad J1-07(-420mil,-2170mil) on Multi-Layer And Pad J1-08(-370mil,-2170mil) on Multi-Layer [Top Solder] Mask Sliver [0.268mil] / [Bottom Solder] Mask Sliver [0.268mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2244.375mil|Location2.X=2255.625mil|Location1.Y=1599.375mil|Location2.Y=1610.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2244.375mil|Location2.X=2255.625mil|Location1.Y=1599.375mil|Location2.Y=1610.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.268mil &lt; 10mil) Between Pad J1-07(-420mil,-2170mil) on Multi-Layer And Pad J1-09(-420mil,-2220mil) on Multi-Layer [Top Solder] Mask Sliver [0.268mil] / [Bottom Solder] Mask Sliver [0.268mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2294.375mil|Location2.X=2305.625mil|Location1.Y=1599.375mil|Location2.Y=1610.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2294.375mil|Location2.X=2305.625mil|Location1.Y=1599.375mil|Location2.Y=1610.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.268mil &lt; 10mil) Between Pad J1-08(-370mil,-2170mil) on Multi-Layer And Pad J1-10(-370mil,-2220mil) on Multi-Layer [Top Solder] Mask Sliver [0.268mil] / [Bottom Solder] Mask Sliver [0.268mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2269.375mil|Location2.X=2280.625mil|Location1.Y=1574.375mil|Location2.Y=1585.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2269.375mil|Location2.X=2280.625mil|Location1.Y=1574.375mil|Location2.Y=1585.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.268mil &lt; 10mil) Between Pad J1-09(-420mil,-2220mil) on Multi-Layer And Pad J1-10(-370mil,-2220mil) on Multi-Layer [Top Solder] Mask Sliver [0.268mil] / [Bottom Solder] Mask Sliver [0.268mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4809.375mil|Location2.X=4820.625mil|Location1.Y=3213.139mil|Location2.Y=3224.389mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4809.375mil|Location2.X=4820.625mil|Location1.Y=3213.139mil|Location2.Y=3224.389mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.535mil &lt; 10mil) Between Pad R12-1(2120mil,-600mil) on Top Layer And Pad R9-2(2170mil,-600mil) on Top Layer [Top Solder] Mask Sliver [8.535mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4809.375mil|Location2.X=4820.625mil|Location1.Y=3161.958mil|Location2.Y=3173.208mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4809.375mil|Location2.X=4820.625mil|Location1.Y=3161.958mil|Location2.Y=3173.208mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.535mil &lt; 10mil) Between Pad R12-2(2120mil,-651.181mil) on Top Layer And Pad R9-1(2170mil,-651.181mil) on Top Layer [Top Solder] Mask Sliver [8.535mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4939.375mil|Location2.X=4950.625mil|Location1.Y=3161.958mil|Location2.Y=3173.208mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4939.375mil|Location2.X=4950.625mil|Location1.Y=3161.958mil|Location2.Y=3173.208mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.535mil &lt; 10mil) Between Pad R13-1(2300mil,-651.181mil) on Top Layer And Pad R15-2(2250mil,-651.181mil) on Top Layer [Top Solder] Mask Sliver [8.535mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4939.375mil|Location2.X=4950.625mil|Location1.Y=3213.139mil|Location2.Y=3224.389mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4939.375mil|Location2.X=4950.625mil|Location1.Y=3213.139mil|Location2.Y=3224.389mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.535mil &lt; 10mil) Between Pad R13-2(2300mil,-600mil) on Top Layer And Pad R15-1(2250mil,-600mil) on Top Layer [Top Solder] Mask Sliver [8.535mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4939.375mil|Location2.X=4950.625mil|Location1.Y=2585.611mil|Location2.Y=2596.861mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4939.375mil|Location2.X=4950.625mil|Location1.Y=2585.611mil|Location2.Y=2596.861mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.535mil &lt; 10mil) Between Pad R14-1(2250mil,-1190mil) on Top Layer And Pad R16-2(2300mil,-1190mil) on Top Layer [Top Solder] Mask Sliver [8.535mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4939.375mil|Location2.X=4950.625mil|Location1.Y=2534.43mil|Location2.Y=2545.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4939.375mil|Location2.X=4950.625mil|Location1.Y=2534.43mil|Location2.Y=2545.68mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.535mil &lt; 10mil) Between Pad R14-2(2250mil,-1241.181mil) on Top Layer And Pad R16-1(2300mil,-1241.181mil) on Top Layer [Top Solder] Mask Sliver [8.535mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4100.021mil|Location2.X=4111.271mil|Location1.Y=2059.375mil|Location2.Y=2070.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4100.021mil|Location2.X=4111.271mil|Location1.Y=2059.375mil|Location2.Y=2070.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.535mil &lt; 10mil) Between Pad R24-1(1454.409mil,-1760mil) on Top Layer And Pad R27-2(1454.409mil,-1710mil) on Top Layer [Top Solder] Mask Sliver [8.535mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4151.202mil|Location2.X=4162.452mil|Location1.Y=2059.375mil|Location2.Y=2070.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4151.202mil|Location2.X=4162.452mil|Location1.Y=2059.375mil|Location2.Y=2070.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.535mil &lt; 10mil) Between Pad R24-2(1505.591mil,-1760mil) on Top Layer And Pad R27-1(1505.591mil,-1710mil) on Top Layer [Top Solder] Mask Sliver [8.535mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4809.375mil|Location2.X=4820.625mil|Location1.Y=2585.611mil|Location2.Y=2596.861mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4809.375mil|Location2.X=4820.625mil|Location1.Y=2585.611mil|Location2.Y=2596.861mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.535mil &lt; 10mil) Between Pad R3-1(2120mil,-1190mil) on Top Layer And Pad R6-2(2170mil,-1190mil) on Top Layer [Top Solder] Mask Sliver [8.535mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4809.375mil|Location2.X=4820.625mil|Location1.Y=2534.43mil|Location2.Y=2545.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4809.375mil|Location2.X=4820.625mil|Location1.Y=2534.43mil|Location2.Y=2545.68mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.535mil &lt; 10mil) Between Pad R3-2(2120mil,-1241.181mil) on Top Layer And Pad R6-1(2170mil,-1241.181mil) on Top Layer [Top Solder] Mask Sliver [8.535mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2474.375mil|Location2.X=2485.625mil|Location1.Y=2503.646mil|Location2.Y=2514.896mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2474.375mil|Location2.X=2485.625mil|Location1.Y=2503.646mil|Location2.Y=2514.896mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (4.795mil &lt; 10mil) Between Pad S1-1(-190mil,-1258.74mil) on Multi-Layer And Pad S1-MH1(-190mil,-1341.417mil) on Multi-Layer [Top Solder] Mask Sliver [4.795mil] / [Bottom Solder] Mask Sliver [4.795mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2474.375mil|Location2.X=2485.625mil|Location1.Y=2725.103mil|Location2.Y=2736.353mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2474.375mil|Location2.X=2485.625mil|Location1.Y=2725.103mil|Location2.Y=2736.353mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (4.795mil &lt; 10mil) Between Pad S1-3(-190mil,-1101.26mil) on Multi-Layer And Pad S1-MH2(-190mil,-1018.583mil) on Multi-Layer [Top Solder] Mask Sliver [4.795mil] / [Bottom Solder] Mask Sliver [4.795mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2474.375mil|Location2.X=2485.625mil|Location1.Y=2053.646mil|Location2.Y=2064.896mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2474.375mil|Location2.X=2485.625mil|Location1.Y=2053.646mil|Location2.Y=2064.896mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (4.795mil &lt; 10mil) Between Pad S2-1(-190mil,-1708.74mil) on Multi-Layer And Pad S2-MH1(-190mil,-1791.417mil) on Multi-Layer [Top Solder] Mask Sliver [4.795mil] / [Bottom Solder] Mask Sliver [4.795mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2474.375mil|Location2.X=2485.625mil|Location1.Y=2275.103mil|Location2.Y=2286.353mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2474.375mil|Location2.X=2485.625mil|Location1.Y=2275.103mil|Location2.Y=2286.353mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (4.795mil &lt; 10mil) Between Pad S2-3(-190mil,-1551.26mil) on Multi-Layer And Pad S2-MH2(-190mil,-1468.583mil) on Multi-Layer [Top Solder] Mask Sliver [4.795mil] / [Bottom Solder] Mask Sliver [4.795mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2474.375mil|Location2.X=2485.625mil|Location1.Y=2952.387mil|Location2.Y=2963.637mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2474.375mil|Location2.X=2485.625mil|Location1.Y=2952.387mil|Location2.Y=2963.637mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (4.795mil &lt; 10mil) Between Pad S3-1(-190mil,-810mil) on Multi-Layer And Pad S3-MH1(-190mil,-892.677mil) on Multi-Layer [Top Solder] Mask Sliver [4.795mil] / [Bottom Solder] Mask Sliver [4.795mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2474.375mil|Location2.X=2485.625mil|Location1.Y=3173.843mil|Location2.Y=3185.093mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2474.375mil|Location2.X=2485.625mil|Location1.Y=3173.843mil|Location2.Y=3185.093mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (4.795mil &lt; 10mil) Between Pad S3-3(-190mil,-652.52mil) on Multi-Layer And Pad S3-MH2(-190mil,-569.842mil) on Multi-Layer [Top Solder] Mask Sliver [4.795mil] / [Bottom Solder] Mask Sliver [4.795mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2250.202mil|Location2.Y=2261.452mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2250.202mil|Location2.Y=2261.452mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-1(1277.48mil,-1554.016mil) on Top Layer And Pad U1-2(1277.48mil,-1534.331mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2427.367mil|Location2.Y=2438.617mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2427.367mil|Location2.Y=2438.617mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-10(1277.48mil,-1376.85mil) on Top Layer And Pad U1-11(1277.48mil,-1357.165mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2407.682mil|Location2.Y=2418.932mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2407.682mil|Location2.Y=2418.932mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-10(1277.48mil,-1376.85mil) on Top Layer And Pad U1-9(1277.48mil,-1396.535mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2447.052mil|Location2.Y=2458.302mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2447.052mil|Location2.Y=2458.302mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-11(1277.48mil,-1357.165mil) on Top Layer And Pad U1-12(1277.48mil,-1337.48mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2466.737mil|Location2.Y=2477.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2466.737mil|Location2.Y=2477.987mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-12(1277.48mil,-1337.48mil) on Top Layer And Pad U1-13(1277.48mil,-1317.795mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2486.422mil|Location2.Y=2497.672mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2486.422mil|Location2.Y=2497.672mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-13(1277.48mil,-1317.795mil) on Top Layer And Pad U1-14(1277.48mil,-1298.11mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2506.107mil|Location2.Y=2517.357mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2506.107mil|Location2.Y=2517.357mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-14(1277.48mil,-1298.11mil) on Top Layer And Pad U1-15(1277.48mil,-1278.425mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2525.792mil|Location2.Y=2537.042mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2525.792mil|Location2.Y=2537.042mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-15(1277.48mil,-1278.425mil) on Top Layer And Pad U1-16(1277.48mil,-1258.74mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3853.273mil|Location2.X=3864.523mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3853.273mil|Location2.X=3864.523mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-17(1198.74mil,-1180mil) on Top Layer And Pad U1-18(1179.055mil,-1180mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3833.588mil|Location2.X=3844.838mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3833.588mil|Location2.X=3844.838mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-18(1179.055mil,-1180mil) on Top Layer And Pad U1-19(1159.37mil,-1180mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3813.903mil|Location2.X=3825.153mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3813.903mil|Location2.X=3825.153mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-19(1159.37mil,-1180mil) on Top Layer And Pad U1-20(1139.685mil,-1180mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2269.887mil|Location2.Y=2281.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2269.887mil|Location2.Y=2281.137mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-2(1277.48mil,-1534.331mil) on Top Layer And Pad U1-3(1277.48mil,-1514.646mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3794.218mil|Location2.X=3805.468mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3794.218mil|Location2.X=3805.468mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-20(1139.685mil,-1180mil) on Top Layer And Pad U1-21(1120mil,-1180mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3774.532mil|Location2.X=3785.782mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3774.532mil|Location2.X=3785.782mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-21(1120mil,-1180mil) on Top Layer And Pad U1-22(1100.315mil,-1180mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3754.847mil|Location2.X=3766.097mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3754.847mil|Location2.X=3766.097mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-22(1100.315mil,-1180mil) on Top Layer And Pad U1-23(1080.63mil,-1180mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3735.162mil|Location2.X=3746.412mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3735.162mil|Location2.X=3746.412mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-23(1080.63mil,-1180mil) on Top Layer And Pad U1-24(1060.945mil,-1180mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3715.477mil|Location2.X=3726.727mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3715.477mil|Location2.X=3726.727mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-24(1060.945mil,-1180mil) on Top Layer And Pad U1-25(1041.26mil,-1180mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3695.792mil|Location2.X=3707.042mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3695.792mil|Location2.X=3707.042mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-25(1041.26mil,-1180mil) on Top Layer And Pad U1-26(1021.575mil,-1180mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3676.107mil|Location2.X=3687.357mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3676.107mil|Location2.X=3687.357mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-26(1021.575mil,-1180mil) on Top Layer And Pad U1-27(1001.89mil,-1180mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3656.422mil|Location2.X=3667.672mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3656.422mil|Location2.X=3667.672mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-27(1001.89mil,-1180mil) on Top Layer And Pad U1-28(982.205mil,-1180mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3636.737mil|Location2.X=3647.987mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3636.737mil|Location2.X=3647.987mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-28(982.205mil,-1180mil) on Top Layer And Pad U1-29(962.52mil,-1180mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3617.052mil|Location2.X=3628.302mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3617.052mil|Location2.X=3628.302mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-29(962.52mil,-1180mil) on Top Layer And Pad U1-30(942.835mil,-1180mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2289.572mil|Location2.Y=2300.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2289.572mil|Location2.Y=2300.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-3(1277.48mil,-1514.646mil) on Top Layer And Pad U1-4(1277.48mil,-1494.961mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3597.367mil|Location2.X=3608.617mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3597.367mil|Location2.X=3608.617mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-30(942.835mil,-1180mil) on Top Layer And Pad U1-31(923.15mil,-1180mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3577.682mil|Location2.X=3588.932mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3577.682mil|Location2.X=3588.932mil|Location1.Y=2590.753mil|Location2.Y=2602.003mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-31(923.15mil,-1180mil) on Top Layer And Pad U1-32(903.465mil,-1180mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2525.792mil|Location2.Y=2537.042mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2525.792mil|Location2.Y=2537.042mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-33(824.724mil,-1258.74mil) on Top Layer And Pad U1-34(824.724mil,-1278.425mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2506.107mil|Location2.Y=2517.357mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2506.107mil|Location2.Y=2517.357mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-34(824.724mil,-1278.425mil) on Top Layer And Pad U1-35(824.724mil,-1298.11mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2486.422mil|Location2.Y=2497.672mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2486.422mil|Location2.Y=2497.672mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-35(824.724mil,-1298.11mil) on Top Layer And Pad U1-36(824.724mil,-1317.795mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2466.737mil|Location2.Y=2477.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2466.737mil|Location2.Y=2477.987mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-36(824.724mil,-1317.795mil) on Top Layer And Pad U1-37(824.724mil,-1337.48mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2447.052mil|Location2.Y=2458.302mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2447.052mil|Location2.Y=2458.302mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-37(824.724mil,-1337.48mil) on Top Layer And Pad U1-38(824.724mil,-1357.165mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2427.367mil|Location2.Y=2438.617mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2427.367mil|Location2.Y=2438.617mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-38(824.724mil,-1357.165mil) on Top Layer And Pad U1-39(824.724mil,-1376.85mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2407.682mil|Location2.Y=2418.932mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2407.682mil|Location2.Y=2418.932mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-39(824.724mil,-1376.85mil) on Top Layer And Pad U1-40(824.724mil,-1396.535mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2309.257mil|Location2.Y=2320.507mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2309.257mil|Location2.Y=2320.507mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-4(1277.48mil,-1494.961mil) on Top Layer And Pad U1-5(1277.48mil,-1475.276mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2387.997mil|Location2.Y=2399.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2387.997mil|Location2.Y=2399.247mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-40(824.724mil,-1396.535mil) on Top Layer And Pad U1-41(824.724mil,-1416.22mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2368.312mil|Location2.Y=2379.562mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2368.312mil|Location2.Y=2379.562mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-41(824.724mil,-1416.22mil) on Top Layer And Pad U1-42(824.724mil,-1435.906mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2348.627mil|Location2.Y=2359.877mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2348.627mil|Location2.Y=2359.877mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-42(824.724mil,-1435.906mil) on Top Layer And Pad U1-43(824.724mil,-1455.591mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2328.942mil|Location2.Y=2340.192mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2328.942mil|Location2.Y=2340.192mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-43(824.724mil,-1455.591mil) on Top Layer And Pad U1-44(824.724mil,-1475.276mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2309.257mil|Location2.Y=2320.507mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2309.257mil|Location2.Y=2320.507mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-44(824.724mil,-1475.276mil) on Top Layer And Pad U1-45(824.724mil,-1494.961mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2289.572mil|Location2.Y=2300.822mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2289.572mil|Location2.Y=2300.822mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-45(824.724mil,-1494.961mil) on Top Layer And Pad U1-46(824.724mil,-1514.646mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2269.887mil|Location2.Y=2281.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2269.887mil|Location2.Y=2281.137mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-46(824.724mil,-1514.646mil) on Top Layer And Pad U1-47(824.724mil,-1534.331mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2250.202mil|Location2.Y=2261.452mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.721mil|Location2.X=3523.971mil|Location1.Y=2250.202mil|Location2.Y=2261.452mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-47(824.724mil,-1534.331mil) on Top Layer And Pad U1-48(824.724mil,-1554.016mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3462.358mil|Location2.X=3473.608mil|Location1.Y=2254.739mil|Location2.Y=2265.989mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3462.358mil|Location2.X=3473.608mil|Location1.Y=2254.739mil|Location2.Y=2265.989mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (6.239mil &lt; 10mil) Between Pad U1-47(824.724mil,-1534.331mil) on Top Layer And Via (779.053mil,-1539.636mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [6.239mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3461.832mil|Location2.X=3473.082mil|Location1.Y=2247.666mil|Location2.Y=2258.916mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3461.832mil|Location2.X=3473.082mil|Location1.Y=2247.666mil|Location2.Y=2258.916mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.811mil &lt; 10mil) Between Pad U1-48(824.724mil,-1554.016mil) on Top Layer And Via (779.053mil,-1539.636mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.811mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3577.682mil|Location2.X=3588.932mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3577.682mil|Location2.X=3588.932mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-49(903.465mil,-1632.756mil) on Top Layer And Pad U1-50(923.15mil,-1632.756mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2328.942mil|Location2.Y=2340.192mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2328.942mil|Location2.Y=2340.192mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-5(1277.48mil,-1475.276mil) on Top Layer And Pad U1-6(1277.48mil,-1455.591mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3597.367mil|Location2.X=3608.617mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3597.367mil|Location2.X=3608.617mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-50(923.15mil,-1632.756mil) on Top Layer And Pad U1-51(942.835mil,-1632.756mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3617.052mil|Location2.X=3628.302mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3617.052mil|Location2.X=3628.302mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-51(942.835mil,-1632.756mil) on Top Layer And Pad U1-52(962.52mil,-1632.756mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3636.737mil|Location2.X=3647.987mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3636.737mil|Location2.X=3647.987mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-52(962.52mil,-1632.756mil) on Top Layer And Pad U1-53(982.205mil,-1632.756mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3656.422mil|Location2.X=3667.672mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3656.422mil|Location2.X=3667.672mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-53(982.205mil,-1632.756mil) on Top Layer And Pad U1-54(1001.89mil,-1632.756mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3676.107mil|Location2.X=3687.357mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3676.107mil|Location2.X=3687.357mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-54(1001.89mil,-1632.756mil) on Top Layer And Pad U1-55(1021.575mil,-1632.756mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3695.792mil|Location2.X=3707.042mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3695.792mil|Location2.X=3707.042mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-55(1021.575mil,-1632.756mil) on Top Layer And Pad U1-56(1041.26mil,-1632.756mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3715.477mil|Location2.X=3726.727mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3715.477mil|Location2.X=3726.727mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-56(1041.26mil,-1632.756mil) on Top Layer And Pad U1-57(1060.945mil,-1632.756mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3735.162mil|Location2.X=3746.412mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3735.162mil|Location2.X=3746.412mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-57(1060.945mil,-1632.756mil) on Top Layer And Pad U1-58(1080.63mil,-1632.756mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3754.847mil|Location2.X=3766.097mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3754.847mil|Location2.X=3766.097mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-58(1080.63mil,-1632.756mil) on Top Layer And Pad U1-59(1100.315mil,-1632.756mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3774.532mil|Location2.X=3785.782mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3774.532mil|Location2.X=3785.782mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-59(1100.315mil,-1632.756mil) on Top Layer And Pad U1-60(1120mil,-1632.756mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2348.627mil|Location2.Y=2359.877mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2348.627mil|Location2.Y=2359.877mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-6(1277.48mil,-1455.591mil) on Top Layer And Pad U1-7(1277.48mil,-1435.906mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3794.218mil|Location2.X=3805.468mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3794.218mil|Location2.X=3805.468mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-60(1120mil,-1632.756mil) on Top Layer And Pad U1-61(1139.685mil,-1632.756mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3813.903mil|Location2.X=3825.153mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3813.903mil|Location2.X=3825.153mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-61(1139.685mil,-1632.756mil) on Top Layer And Pad U1-62(1159.37mil,-1632.756mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3833.588mil|Location2.X=3844.838mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3833.588mil|Location2.X=3844.838mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-62(1159.37mil,-1632.756mil) on Top Layer And Pad U1-63(1179.055mil,-1632.756mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3830.462mil|Location2.X=3841.712mil|Location1.Y=2133.938mil|Location2.Y=2145.188mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3830.462mil|Location2.X=3841.712mil|Location1.Y=2133.938mil|Location2.Y=2145.188mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.279mil &lt; 10mil) Between Pad U1-62(1159.37mil,-1632.756mil) on Top Layer And Via (1170mil,-1680mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.279mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3853.273mil|Location2.X=3864.523mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3853.273mil|Location2.X=3864.523mil|Location1.Y=2185.241mil|Location2.Y=2196.491mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-63(1179.055mil,-1632.756mil) on Top Layer And Pad U1-64(1198.74mil,-1632.756mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3836.995mil|Location2.X=3848.245mil|Location1.Y=2134.022mil|Location2.Y=2145.272mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3836.995mil|Location2.X=3848.245mil|Location1.Y=2134.022mil|Location2.Y=2145.272mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.02mil &lt; 10mil) Between Pad U1-63(1179.055mil,-1632.756mil) on Top Layer And Via (1170mil,-1680mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.02mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2368.312mil|Location2.Y=2379.562mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2368.312mil|Location2.Y=2379.562mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-7(1277.48mil,-1435.906mil) on Top Layer And Pad U1-8(1277.48mil,-1416.22mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2387.997mil|Location2.Y=2399.247mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3965.477mil|Location2.X=3976.727mil|Location1.Y=2387.997mil|Location2.Y=2399.247mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.874mil &lt; 10mil) Between Pad U1-8(1277.48mil,-1416.22mil) on Top Layer And Pad U1-9(1277.48mil,-1396.535mil) on Top Layer [Top Solder] Mask Sliver [7.874mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3854.375mil|Location2.X=3865.625mil|Location1.Y=1474.375mil|Location2.Y=1485.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3854.375mil|Location2.X=3865.625mil|Location1.Y=1474.375mil|Location2.Y=1485.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.378mil &lt; 10mil) Between Via (1170mil,-2320mil) from Top Layer to Bottom Layer And Via (1210mil,-2320mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.378mil] / [Bottom Solder] Mask Sliver [8.378mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDICALQ31OVHAHBGV3QB3LCVITKJJLRCIE25WNXVBFIIH53QAQMHX"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=10mil) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4542.505mil|Location2.X=4550.172mil|Location1.Y=2823.568mil|Location2.Y=2831.235mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4542.505mil|Location2.X=4550.172mil|Location1.Y=2823.568mil|Location2.Y=2831.235mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Arc (1871.417mil,-972.598mil) on Top Overlay And Pad SW3-2(1871.417mil,-993.504mil) on Top Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5042.505mil|Location2.X=5050.172mil|Location1.Y=2823.568mil|Location2.Y=2831.235mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5042.505mil|Location2.X=5050.172mil|Location1.Y=2823.568mil|Location2.Y=2831.235mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Arc (2371.417mil,-972.598mil) on Top Overlay And Pad SW8-2(2371.417mil,-993.504mil) on Top Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4751.316mil|Location2.X=4762.566mil|Location1.Y=2969.375mil|Location2.Y=2980.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4751.316mil|Location2.X=4762.566mil|Location1.Y=2969.375mil|Location2.Y=2980.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.789mil &lt; 10mil) Between Pad Free-1(2210mil,-825mil) on Multi-Layer And Track (2078.11mil,-871.221mil)(2078.11mil,-648.779mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9.789mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4997.433mil|Location2.X=5008.683mil|Location1.Y=2969.375mil|Location2.Y=2980.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4997.433mil|Location2.X=5008.683mil|Location1.Y=2969.375mil|Location2.Y=2980.625mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (9.789mil &lt; 10mil) Between Pad Free-1(2210mil,-825mil) on Multi-Layer And Track (2341.89mil,-871.221mil)(2341.89mil,-648.779mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [9.789mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2660.596mil|Location2.X=2668.262mil|Location1.Y=3236.167mil|Location2.Y=3243.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2660.596mil|Location2.X=2668.262mil|Location1.Y=3236.167mil|Location2.Y=3243.833mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Pad LED3-1(12.146mil,-588.976mil) on Top Layer And Track (-720mil,-560mil)(240mil,-560mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2716.403mil|Location2.X=2724.07mil|Location1.Y=3236.167mil|Location2.Y=3243.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2716.403mil|Location2.X=2724.07mil|Location1.Y=3236.167mil|Location2.Y=3243.833mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Pad LED3-2(67.953mil,-588.976mil) on Top Layer And Track (-720mil,-560mil)(240mil,-560mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3745.812mil|Location2.X=3753.479mil|Location1.Y=1466.167mil|Location2.Y=1473.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3745.812mil|Location2.X=3753.479mil|Location1.Y=1466.167mil|Location2.Y=1473.833mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Pad R?-1(1094.409mil,-2320mil) on Top Layer And Track (260mil,-2330mil)(1720mil,-2330mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3936.994mil|Location2.X=3944.66mil|Location1.Y=1466.167mil|Location2.Y=1473.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3936.994mil|Location2.X=3944.66mil|Location1.Y=1466.167mil|Location2.Y=1473.833mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Pad R?-1(1285.591mil,-2320mil) on Top Layer And Track (260mil,-2330mil)(1720mil,-2330mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3796.993mil|Location2.X=3804.66mil|Location1.Y=1466.167mil|Location2.Y=1473.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3796.993mil|Location2.X=3804.66mil|Location1.Y=1466.167mil|Location2.Y=1473.833mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Pad R?-2(1145.591mil,-2320mil) on Top Layer And Track (260mil,-2330mil)(1720mil,-2330mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3885.812mil|Location2.X=3893.479mil|Location1.Y=1466.167mil|Location2.Y=1473.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3885.812mil|Location2.X=3893.479mil|Location1.Y=1466.167mil|Location2.Y=1473.833mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Pad R?-2(1234.409mil,-2320mil) on Top Layer And Track (260mil,-2330mil)(1720mil,-2330mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2432.178mil|Location2.X=2439.845mil|Location1.Y=1996.167mil|Location2.Y=2003.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2432.178mil|Location2.X=2439.845mil|Location1.Y=1996.167mil|Location2.Y=2003.833mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Pad S2-MH1(-190mil,-1791.417mil) on Multi-Layer And Track (-720mil,-1800mil)(240mil,-1800mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2432.178mil|Location2.X=2439.845mil|Location1.Y=3236.167mil|Location2.Y=3243.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2432.178mil|Location2.X=2439.845mil|Location1.Y=3236.167mil|Location2.Y=3243.833mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 10mil) Between Pad S3-MH2(-190mil,-569.842mil) on Multi-Layer And Track (-720mil,-560mil)(240mil,-560mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4561.383mil|Location2.X=4572.633mil|Location1.Y=2453.371mil|Location2.Y=2464.621mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4561.383mil|Location2.X=4572.633mil|Location1.Y=2453.371mil|Location2.Y=2464.621mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (7.992mil &lt; 10mil) Between Pad SW3-1(1871.417mil,-1306.496mil) on Top Layer And Track (1740mil,-1350mil)(2600mil,-1350mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [7.992mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4738.548mil|Location2.X=4749.798mil|Location1.Y=2453.371mil|Location2.Y=2464.621mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4738.548mil|Location2.X=4749.798mil|Location1.Y=2453.371mil|Location2.Y=2464.621mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (7.992mil &lt; 10mil) Between Pad SW3-3(2048.583mil,-1306.496mil) on Top Layer And Track (1740mil,-1350mil)(2600mil,-1350mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [7.992mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4510.202mil|Location2.X=4521.452mil|Location1.Y=3225.379mil|Location2.Y=3236.629mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4510.202mil|Location2.X=4521.452mil|Location1.Y=3225.379mil|Location2.Y=3236.629mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (7.992mil &lt; 10mil) Between Pad SW6-2(1871.417mil,-603.504mil) on Top Layer And Track (1740mil,-560mil)(2600mil,-560mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [7.992mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4687.367mil|Location2.X=4698.617mil|Location1.Y=3225.379mil|Location2.Y=3236.629mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4687.367mil|Location2.X=4698.617mil|Location1.Y=3225.379mil|Location2.Y=3236.629mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (7.992mil &lt; 10mil) Between Pad SW6-4(2048.583mil,-603.504mil) on Top Layer And Track (1740mil,-560mil)(2600mil,-560mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [7.992mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5010.202mil|Location2.X=5021.452mil|Location1.Y=3225.379mil|Location2.Y=3236.629mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5010.202mil|Location2.X=5021.452mil|Location1.Y=3225.379mil|Location2.Y=3236.629mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (7.992mil &lt; 10mil) Between Pad SW7-2(2371.417mil,-603.504mil) on Top Layer And Track (1740mil,-560mil)(2600mil,-560mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [7.992mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5187.367mil|Location2.X=5198.617mil|Location1.Y=3225.379mil|Location2.Y=3236.629mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5187.367mil|Location2.X=5198.617mil|Location1.Y=3225.379mil|Location2.Y=3236.629mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (7.992mil &lt; 10mil) Between Pad SW7-4(2548.583mil,-603.504mil) on Top Layer And Track (1740mil,-560mil)(2600mil,-560mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [7.992mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5061.383mil|Location2.X=5072.633mil|Location1.Y=2453.371mil|Location2.Y=2464.621mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5061.383mil|Location2.X=5072.633mil|Location1.Y=2453.371mil|Location2.Y=2464.621mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (7.992mil &lt; 10mil) Between Pad SW8-1(2371.417mil,-1306.496mil) on Top Layer And Track (1740mil,-1350mil)(2600mil,-1350mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [7.992mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5238.548mil|Location2.X=5249.798mil|Location1.Y=2453.371mil|Location2.Y=2464.621mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5238.548mil|Location2.X=5249.798mil|Location1.Y=2453.371mil|Location2.Y=2464.621mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (7.992mil &lt; 10mil) Between Pad SW8-3(2548.583mil,-1306.496mil) on Top Layer And Track (1740mil,-1350mil)(2600mil,-1350mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [7.992mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID3KDATASK3VTRI3W05AIPG2HXIJAI14CEIVOQBIKFD14RPPTRC1OL"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=10mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5726.858mil|Location2.X=5738.108mil|Location1.Y=2524.375mil|Location2.Y=2535.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5726.858mil|Location2.X=5738.108mil|Location1.Y=2524.375mil|Location2.Y=2535.625mil|Absolute=True">Silk To Silk Clearance Constraint: (5.034mil &lt; 10mil) Between Text "DIO2" (2950mil,-1270mil) on Top Overlay And Track (3070mil,-1490mil)(3070mil,-1150mil) on Top Overlay Silk Text to Silk Clearance [5.034mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5726.858mil|Location2.X=5738.108mil|Location1.Y=2489.367mil|Location2.Y=2500.617mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5726.858mil|Location2.X=5738.108mil|Location1.Y=2489.367mil|Location2.Y=2500.617mil|Absolute=True">Silk To Silk Clearance Constraint: (5.034mil &lt; 10mil) Between Text "DIO3" (2950mil,-1330mil) on Top Overlay And Track (3070mil,-1490mil)(3070mil,-1150mil) on Top Overlay Silk Text to Silk Clearance [5.034mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5586.858mil|Location2.X=5598.108mil|Location1.Y=2359.37mil|Location2.Y=2370.62mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5586.858mil|Location2.X=5598.108mil|Location1.Y=2359.37mil|Location2.Y=2370.62mil|Absolute=True">Silk To Silk Clearance Constraint: (5.034mil &lt; 10mil) Between Text "DIO4" (2810mil,-1450mil) on Top Overlay And Track (2930mil,-1490mil)(2930mil,-1150mil) on Top Overlay Silk Text to Silk Clearance [5.034mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5586.858mil|Location2.X=5598.108mil|Location1.Y=2359.37mil|Location2.Y=2370.62mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5586.858mil|Location2.X=5598.108mil|Location1.Y=2359.37mil|Location2.Y=2370.62mil|Absolute=True">Silk To Silk Clearance Constraint: (5.034mil &lt; 10mil) Between Text "DIO4" (2810mil,-1450mil) on Top Overlay And Track (2930mil,-1490mil)(2930mil,-1150mil) on Top Overlay Silk Text to Silk Clearance [5.034mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

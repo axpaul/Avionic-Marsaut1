@@ -1,0 +1,8 @@
+DRC Rules Export File for PCB: C:\Users\Quent\Desktop\Altium_Workspace\PCB_IHM_MS1\IHM.PcbDoc
+RuleKind=Clearance|RuleName=HF_clearance|Scope=Board|Minimum=11.81
+RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=4.00
+RuleKind=Width|RuleName=Width|Scope=Board|Minimum=10.00
+RuleKind=Width|RuleName=PWR|Scope=Board|Minimum=10.00
+RuleKind=Width|RuleName=HF|Scope=Board|Minimum=5.93
+RuleKind=Clearance|RuleName=Clearance|Scope=Board|Minimum=11.81
