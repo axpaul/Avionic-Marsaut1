@@ -10,7 +10,7 @@ Grabcad :
 - https://grabcad.com/library/avionics-system-for-marsaut-1-rocket-mines-space-1
 - https://grabcad.com/library/marsaut-1-fusex-2022-1
 
-La première itération du séquenceur, conçue par Arthur Chassande (plus tard abandonnée), était équipée d'un microcontrôleur Stm32H7. La deuxième version, par Paul Miailhe, utilise directement un Nucléo STM32F411. Ce séquenceur comprenait deux cartes électroniques supplémentaires, une carte d'interface intégrée dans le lanceur, qui abritait l'ensemble des connecteurs, et une carte IHM indépendante, qui pouvait afficher à l'utilisateur l'état actuel de la fusée. Sur la carte mère, on trouve :
+La première itération du séquenceur, conçue par Arthur Chassande (plus tard abandonnée), était équipée d'un microcontrôleur Stm32H7. La deuxième version, par Paul Miailhe, utilise directement un Nucléo STM32F411. Ce séquenceur comprenait deux cartes électroniques supplémentaires, une carte d'interface intégrée dans le lanceur, qui abritait l'ensemble des connecteurs, et une carte IHM indépendante concu par Quentin Bakrim, qui pouvait afficher à l'utilisateur l'état actuel de la fusée. Sur la carte mère, on trouve :
 
 ## Capteurs de base
 - Un assortiment de capteurs de base permettant de collecter les paramètres d'altitude (GPS, IMU, baromètre, température).
