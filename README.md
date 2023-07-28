@@ -1,17 +1,39 @@
-#Avionic-Marsaut1
-Marsaut_1 experimental rocket avionic (On-board electronics) created by Mines Space, Version 2022 launched at C'space
+# Avionic-Marsaut1
+       
+## Marsaut_1 est une fusée expérimentale équipée d'une avionique (électronique de bord) créée par Mines Space. La version n°2 a été lancée au C'space 2022.
 
-The first iteration of the sequencer designed by Arthur Chassande (later abandoned) was equipped with a Stm32H7 microcontroller. This sequencer included two additional electronic cards, an interface card integrated into the launcher, which housed the connector assembly, and an independent IHM card, which could display the current status of the fuse to the user. On the motherboard, we find :
+*CC BY-NC-SA 4.0*
 
-- An assortment of basic capteurs allowing to collect the parameters of the altitude (GPS, IMU, barometer, temperature).
-- An "aérocontact" to detect the collapse
-- A flash memory and an SD card for the registration of the data.
-- An 868 MHZ frequency modulation transmitter, operating in FSK for real-time flight data transmission
-- A buzzer and an LED for indicating the card status
-- H-bridge drivers to control the various deployment systems (parachute, drone and nose cone)
+![alt tag](https://github.com/axpaul/Avionic-Marsaut1/blob/main/Image/MS1-3D%20n%C2%B02%20V2.png)
 
-| Routing | 3D | Description |
+Grabcad :
+- https://grabcad.com/library/avionics-system-for-marsaut-1-rocket-mines-space-1
+- https://grabcad.com/library/marsaut-1-fusex-2022-1
+
+La première itération du séquenceur, conçue par Arthur Chassande (plus tard abandonnée), était équipée d'un microcontrôleur Stm32H7. La deuxième version, par Paul Miailhe, utilise directement un Nucléo STM32F411. Ce séquenceur comprenait deux cartes électroniques supplémentaires, une carte d'interface intégrée dans le lanceur, qui abritait l'ensemble des connecteurs, et une carte IHM indépendante, qui pouvait afficher à l'utilisateur l'état actuel de la fusée. Sur la carte mère, on trouve :
+
+## Capteurs de base
+- Un assortiment de capteurs de base permettant de collecter les paramètres d'altitude (GPS, IMU, baromètre, température).
+- Un "acelerocontact" pour détecter le décollage 
+
+## Enregistrement de données
+- Une mémoire flash et une carte SD pour l'enregistrement des données.
+
+## Transmission de données
+- Un émetteur de modulation de fréquence à 868 MHZ, fonctionnant en FSK pour la transmission en temps réel des données de vol
+
+## Indicateurs d'état
+- Un buzzer et une LED pour indiquer l'état de la carte
+
+## Contrôle des systèmes de déploiement
+- Des drivers en pont en H pour contrôler les différents systèmes de déploiement (parachute, drone et nez de cône)
+
+
+| 3D | Routing  | Description |
 |:---:|:---:|:---:|
-| ![alt text](https://github.com/axpaul/Avionic-Marsaut1/blob/main/Image/MS1-3D%20V1.png) | ![alt text](https://github.com/axpaul/Avionic-Marsaut1/blob/main/Image/MS1-routage%20V1.png) | V°1 of avionics for Marsaut 1 |
-| ![alt text](https://github.com/axpaul/Avionic-Marsaut1/blob/main/Image/MS1-3D%20V2.png) | ![alt text](https://github.com/axpaul/Avionic-Marsaut1/blob/main/Image/MS1-routage%20V2.png) | V°2 of avionics for Marsaut 1 |
+| ![alt text](https://github.com/axpaul/Avionic-Marsaut1/blob/main/Image/MS1-3D%20V1.png) | ![alt text](https://github.com/axpaul/Avionic-Marsaut1/blob/main/Image/MS1-routage%20V1.png) | V°1 of avionics for Marsaut 1, 6 layers |
+| ![alt text](https://github.com/axpaul/Avionic-Marsaut1/blob/main/Image/MS1-3D%20V2.png) | ![alt text](https://github.com/axpaul/Avionic-Marsaut1/blob/main/Image/MS1-routage%20N%C2%B03%20V2.png) | V°2 of avionics for Marsaut 1, 4 layers, fly model |
 
+## Licence 
+
+![alt tag](https://github.com/axpaul/Avionic-Marsaut1/blob/main/Cc-by-nc-sa_icon.svg.png)
