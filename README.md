@@ -14,7 +14,7 @@ La première itération du séquenceur, conçue par Arthur Chassande (plus tard 
 
 ## Capteurs de base
 - Un assortiment de capteurs de base permettant de collecter les paramètres d'altitude (GPS, IMU, baromètre, température).
-- Un "acelecroontact" pour détecter le décollage 
+- Un "acelerocontact" pour détecter le décollage 
 
 ## Enregistrement de données
 - Une mémoire flash et une carte SD pour l'enregistrement des données.
