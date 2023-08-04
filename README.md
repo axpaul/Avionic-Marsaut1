@@ -2,7 +2,7 @@
        
 ## Marsaut_1 est une fusée expérimentale équipée d'une avionique (électronique de bord) créée par Mines Space. La version n°2 a été lancée au C'space 2022.
 
-*CC BY-NC-SA 4.0*
+*CC BY-NC-SA 4.0, Copyright 2023 Miailhe Paul, all rights reserved.*
 
 ![alt tag](https://github.com/axpaul/Avionic-Marsaut1/blob/main/Image/MS1-3D%20n%C2%B02%20V2.png)
 
